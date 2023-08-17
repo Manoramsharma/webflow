@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700&display=swap');
+
 /* prettier-ignore */
 
 :root {
@@ -96,13 +101,11 @@
 }
 
 .rightPanel{
-  width: 30vw;
-  height: 100vh;
-  background-color: rgb(148, 154, 154);
-  position: absolute;
-  right: 0;
-  top: 0;
+  filter: drop-shadow(24px 0 16px rgb(0, 0, 0));
+  background-color: rgb(255, 255, 255);
 }
+
+
 
 body {
   margin: 0;
