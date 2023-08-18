@@ -1,6 +1,6 @@
 .AutomationCanvas{
   --edges-stroke-color: green;
-  width: 70vw;
+  width: 100vw;
   height: 100vh;
   background-color: var(--color-base100);
   
