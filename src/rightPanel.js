@@ -1,12 +1,52 @@
 import React, { forwardRef, useState } from 'react';
 import { IconPlus } from '@tabler/icons-react';
-import { useDisclosure } from '@mantine/hooks';
-import { Drawer, Button, Group, Switch,Divider, Title, Avatar, Text, Select, Flex, TextInput, Checkbox} from '@mantine/core';
 import "./index.scss";
+import { styled } from '@mui/material/styles';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import { FormControl, MenuItem, Select } from '@mui/material';
+import MultipleOptions from './components/MultipleOptions';
 
 
 export default function RightPanel(){
-    const [label,setLabel] = useState('When subscriber joins group(s)')
+    const [count,setCount] = useState(1)
+    const [labelObj, setLabelObj] = useState({
+      label1: '',
+      label2: '',
+      label3: ''
+    })
+    const [triggerToggle, setTriggerToggle] = useState({
+      t1: true,
+      t2: true,
+      t3: true
+
+    })
+
+    const handleClick = () =>{
+      setCount(prevState => prevState += 1)
+    }
+
+    const handleDelete = () => {
+      setCount(prevState => prevState -= 1)
+    }
+    
+    const handleChange1 = (event)=>{
+      setLabelObj({ ...labelObj,
+        label1: event.target.value})
+    }
+    const handleChange2 = (event)=>{
+      setLabelObj({ ...labelObj,
+        label2: event.target.value})
+    }
+    const handleChange3 = (event)=>{
+      setLabelObj({ ...labelObj,
+        label3: event.target.value})
+    }
+    console.log(labelObj)
+
     const data = [
         {
           image: 'https://img.icons8.com/fluency-systems-regular/48/user--v1.png',
@@ -46,108 +86,179 @@ export default function RightPanel(){
           description: 'Workflow triggered on a specific date (great for subscriptions, free trials, etc.)',
         },
       ];
-      
-    //   interface extends React.ComponentPropsWithoutRef<'div'> {
-    //     image: string;
-    //     label: string;
-    //     description: string;
-    //   }
-      
-    //   const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
-    //     ({ image, label, description, ...others }: ItemProps, ref) => (
-    //       <div ref={ref} {...others}>
-    //         <Group noWrap>
-    //           <Avatar src={image} />
-      
-    //           <div>
-    //             <Text size="sm">{label}</Text>
-    //             <Text size="xs" opacity={0.65}>
-    //               {description}
-    //             </Text>
-    //           </div>
-    //         </Group>
-    //       </div>
-    //     )
-    //   );
-    const SelectItem = React.forwardRef(function ItemProps({ image, label, description, ...others }, ref) {
-        return (
-          React.createElement('div', { ref, ...others },
-            React.createElement(Group, { noWrap: true },
-              React.createElement('div', {className: 'flex flex-row justify-between items-start space-x-[8px]'},
-                React.createElement('img', { src: image, className: 'w-[16px] h-[16px] object-contain opacity-80' }),
-                React.createElement('div', {className:'flex flex-col'},
-                  React.createElement('h1', {className: 'font-inter font-semiBold text-[12px]'}, label),
-                  React.createElement('h1', {className: 'font-inter font-light text-[10px]'}, description)
-                )
-              )
-            )
-          )
-        );
-      });      
+    
+      const IOSSwitch = styled((props) => (
+        <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+      ))(({ theme }) => ({
+        width: 42,
+        height: 26,
+        padding: 0,
+        '& .MuiSwitch-switchBase': {
+          padding: 0,
+          margin: 2,
+          transitionDuration: '300ms',
+          '&.Mui-checked': {
+            transform: 'translateX(16px)',
+            color: '#fff',
+            '& + .MuiSwitch-track': {
+              backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#627dde',
+              opacity: 1,
+              border: 0,
+            },
+            '&.Mui-disabled + .MuiSwitch-track': {
+              opacity: 0.5,
+            },
+          },
+          '&.Mui-focusVisible .MuiSwitch-thumb': {
+            color: '#E9E9EA',
+            border: '6px solid #fff',
+          },
+          '&.Mui-disabled .MuiSwitch-thumb': {
+            color:
+              theme.palette.mode === 'light'
+                ? theme.palette.grey[100]
+                : theme.palette.grey[600],
+          },
+          '&.Mui-disabled + .MuiSwitch-track': {
+            opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+          },
+        },
+        '& .MuiSwitch-thumb': {
+          boxSizing: 'border-box',
+          width: 22,
+          height: 22,
+        },
+        '& .MuiSwitch-track': {
+          borderRadius: 26 / 2,
+          backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
+          opacity: 1,
+          transition: theme.transitions.create(['background-color'], {
+            duration: 500,
+          }),
+        },
+      }));
+    
 
-      const handleTriggerMenu = () =>{
-        return (
-            <div className='rightPanel'>
-                  <Divider my="xs" label="OR" />
-                  <Select
-      label="Trigger"
-      placeholder="Choose a trigger"
-      itemComponent={SelectItem}
-      data={data}
-      searchable
-      maxDropdownHeight={400}
-      nothingFound="Nobody here"
-      filter={(value, item) =>
-        item.label.toLowerCase().includes(value.toLowerCase().trim()) ||
-        item.description.toLowerCase().includes(value.toLowerCase().trim())
-      }
-    />
-                  <Divider my="xs" label="OR" />
-
-            </div>
-        )
-      }
-      
     return (
-        <div className='flex flex-col justify-between items-center py-[32px] bg-white drop-shadow-lg'>
-          <div className='flex flex-col'>
-            <div className='px-[24px]'>
-              <Switch size="md" color="indigo" />
-            </div>
-            <div className='w-full h-[1px] rounded-full bg-[#343638] my-[32px] opacity-[10%]'/>
+        <div className='flex flex-col justify-between items-start py-[32px] bg-white drop-shadow-lg h-[100vh]'>
+          <div className='px-[24px] my-0'>
+            <FormControlLabel control={<IOSSwitch/>} />
+          </div>
+          <div className='w-full h-[1px] rounded-full bg-[#343638] opacity-[10%]'/>
+          <div className='flex flex-col overflow-y-auto pt-[32px]'>
             <div className='flex flex-col justify-between items-start space-y-[5px] max-w-[340px] px-[24px]'>
               <h1 className= 'font-semiBold text-black font-inter text-[16px]'>Create Workflow Trigger</h1>
               <p className='font-normal font-inter text-[12px]'>Add upto 3 triggers. Define which actions will start your subscriber journey</p>
             </div>
             <div className='mx-[24px] my-[24px] p-[12px] rounded-[5px] border-[#343638] border w-[350px] flex flex-col border-opacity-10'>
-              <div className='mb-[16px]'>
-                <Select
-                label="Trigger"
-                placeholder="Choose a trigger"
-                itemComponent={SelectItem}
-                data={data}
-                searchable
-                maxDropdownHeight={400}
-                nothingFound="Nobody here"
-                filter={(value, item) =>
-                  item.label.toLowerCase().includes(value.toLowerCase().trim()) ||
-                  item.description.toLowerCase().includes(value.toLowerCase().trim())
-                }/>
-
+              <div className='flex flex-row justify-between items-center px-[8px]'>
+                <button>Trigger</button>
+                {count > 1 && <button className='px-[8px] py-[2px] bg-[#d3d6d9] rounded-md flex flex-row items-center justify-between cursor-pointer font-inter text-[12px]' onClick={handleDelete}>Delete</button>}
               </div>
+              <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                <Select value={labelObj.label1} onChange={handleChange1}
+                renderValue={(selected) => {
+                            return <em>{labelObj.label1}</em>
+                        }} 
+                >
+                  {data.map((item)=>{
+                    return(
+                        <MenuItem value = {item.value}>
+                          <div className='flex flex-row justify-between items-start whitespace-normal space-x-[8px]'>
+                            <img className='w-[16px] h-[16px]' src={item.image}/>
+                            <div className='flex flex-col w-[300px]'>
+                              <h1 className='font-semiBold font-inter text-[12px]'>{item.value}</h1>
+                              <p className='font-inter text-[10px] opacity-80'>{item.description}</p>
+                            </div>
+                          </div>
+                        </MenuItem>
+                    )
+                  })}
+                </Select>
+              </FormControl>
+              <MultipleOptions label={labelObj.label1}/>
             </div>
-            <div className='mx-[24px] px-[8px] py-[2px] bg-[#d3d6d9] rounded-md w-[150px] flex flex-row items-center justify-between'>
+            {count >= 2 && <>
+              <div className='flex flex-row space-x-[8px] px-[24px] items-center justify-between'>
+              <h1 className='font-inter opacity-[60%] text-[12px]'>OR</h1>
+              <div className='w-full h-[1px] rounded-full bg-[#343638] opacity-[10%]'></div>
+            </div>
+            <div className='mx-[24px] my-[24px] p-[12px] rounded-[5px] border-[#343638] border w-[350px] flex flex-col border-opacity-10'>
+              <div className='flex flex-row justify-between items-center px-[8px]'>
+                <button>Trigger</button>
+                <button className='px-[8px] py-[2px] bg-[#d3d6d9] rounded-md flex flex-row items-center justify-between cursor-pointer font-inter text-[12px]' onClick={handleDelete}>Delete</button>
+              </div>
+              <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                <Select value={labelObj.label2} onChange={handleChange2}
+                renderValue={(selected) => {
+                            return <em>{labelObj.label2}</em>
+                        }}
+                >
+                  {data.map((item)=>{
+                    return(
+                        <MenuItem value={item.value}>
+                          <div className='flex flex-row justify-between items-start whitespace-normal space-x-[8px]'>
+                            <img className='w-[16px] h-[16px]' src={item.image}/>
+                            <div className='flex flex-col w-[300px]'>
+                              <h1 className='font-semiBold font-inter text-[12px]'>{item.value}</h1>
+                              <p className='font-inter text-[10px] opacity-80'>{item.description}</p>
+                            </div>
+                          </div>
+                        </MenuItem>
+                    )
+                  })}
+                </Select>
+              </FormControl>
+              <MultipleOptions label={labelObj.label2}/>
+            </div>
+            </>}
+            {count >= 3 && <>
+              <div className='flex flex-row space-x-[8px] px-[24px] items-center justify-between'>
+              <h1 className='font-inter opacity-[60%] text-[12px]'>OR</h1>
+              <div className='w-full h-[1px] rounded-full bg-[#343638] opacity-[10%]'></div>
+            </div>
+            <div className='mx-[24px] my-[24px] p-[12px] rounded-[5px] border-[#343638] border w-[350px] flex flex-col border-opacity-10'>
+              <div className='flex flex-row justify-between items-center px-[8px]'>
+                <button>Trigger</button>
+                <button className='px-[8px] py-[2px] bg-[#d3d6d9] rounded-md flex flex-row items-center justify-between cursor-pointer font-inter text-[12px]' onClick={handleDelete}>Delete</button>
+              </div>
+              <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                <Select 
+                value={labelObj.label3} 
+                onChange={handleChange3}
+                renderValue={(selected) => {
+                            return <em>{labelObj.label3}</em>
+                        }} 
+                >
+                  {data.map((item)=>{
+                    return(
+                        <MenuItem value = {item.label}>
+                          <div className='flex flex-row justify-between items-start whitespace-normal space-x-[8px]'>
+                            <img className='w-[16px] h-[16px]' src={item.image}/>
+                            <div className='flex flex-col w-[300px]'>
+                              <h1 className='font-semiBold font-inter text-[12px]'>{item.value}</h1>
+                              <p className='font-inter text-[10px] opacity-80'>{item.description}</p>
+                            </div>
+                          </div>
+                        </MenuItem>
+                    )
+                  })}
+                </Select>
+              </FormControl>
+              <MultipleOptions label={labelObj.label3}/>
+            </div>
+            </>}
+            {count >= 3 ? <div className='mx-[24px] px-[8px] py-[2px] bg-[#e9eaeb] text-[#929496] rounded-md w-[150px] flex flex-row items-center justify-between opacity-50 cursor-not-allowed'>
               <img src="https://img.icons8.com/android/24/plus.png" className='w-[12px] h-[12px]'/>
-              <button className='text-black font-inter text-[12px]' onClick={handleTriggerMenu}>Add another trigger</button>
+              <button className='text-black font-inter text-[12px] cursor-not-allowed'>Add another trigger</button>
+            </div> : <div className='mx-[24px] px-[8px] py-[2px] bg-[#d3d6d9] rounded-md w-[150px] flex flex-row items-center justify-between cursor-pointer'>
+              <img src="https://img.icons8.com/android/24/plus.png" className='w-[12px] h-[12px]'/>
+              <button className='text-black font-inter text-[12px]' onClick={handleClick}>Add another trigger</button>
             </div>
+            }
+            
             <div className='max-w-[350px] mx-[24px] my-[24px]'>
-              <Checkbox
-                label="Allow subscribers to repeat the workflow"
-                description="When enabled, subscribers can trigger the workflow once every 24 hours. Valid for trigger types: 
-                Joins a group, Completes a form, Clicks a link and Field updated."
-                color="indigo"
-                size="md"
-              />
+              
             </div>
           </div>
           <div className='flex flex-col w-full'>
