@@ -73,12 +73,14 @@ const App = () => {
 
   return (
     <div className="App">
-      <Layout elements={elements} />
-      <RightPanel/>
-      {/* <PermanentDrawerRight/> */}
-      {/* <Drawer opened={true} position="right"  overlayProps={{ opacity: 0, blur: 0 }} withCloseButton={false}>
-          
-      </Drawer> */}      
+      <div className="flex flex-row w-full">
+        <Layout elements={elements} />
+        <RightPanel/>
+        {/* <PermanentDrawerRight/> */}
+        {/* <Drawer opened={true} position="right"  overlayProps={{ opacity: 0, blur: 0 }} withCloseButton={false}>
+            
+        </Drawer> */}      
+      </div>
 
     </div>
   );
