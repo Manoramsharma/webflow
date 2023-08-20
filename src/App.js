@@ -2,7 +2,6 @@ import React from "react";
 import _ from "lodash";
 import Layout from "./Automation";
 import { getIncomers, getOutgoers } from "react-flow-renderer";
-import { initialElements } from "./Data/Elements1";
 import { getUpdatedElementsAfterNodeAddition } from "./Utils/WorkflowElementUtils";
 import "antd/dist/antd.css";
 import "./index.scss";
@@ -10,7 +9,62 @@ import RightPanel from "./rightPanel";
 
 const App = () => {
   const [elements, setElements] = React.useState([]);
-
+  const [initialElements, setInitialElements] = React.useState([
+    [
+      {
+        id: "e1-2",
+        source: "1",
+        target: "2",
+        type: "condition",
+      },
+      {
+        id: "e2-3",
+        source: "2",
+        target: "3",
+        type: "condition",
+      },
+      {
+        id: "e3-4",
+        source: "3",
+        target: "4",
+        type: "condition",
+        data: {
+          title: "Default condition",
+          disabled: true,
+        },
+      },
+      {
+        id: "e3-5",
+        source: "3",
+        target: "5",
+        type: "condition",
+        data: {
+          title: "Editable branch",
+        },
+      },
+      {
+        id: "e4-6",
+        source: "4",
+        target: "6",
+        type: "condition",
+      },
+      {
+        id: "e5-6",
+        source: "5",
+        target: "6",
+        type: "condition",
+      },
+      {
+        id: "e6-7",
+        source: "6",
+        target: "7",
+        type: "condition",
+      },
+    ]
+  ]);
+// const updateData =(data) =>{
+//   setInitialElements(...initialElements, data)
+// }
   const onAddNodeCallback = ({ id, type }) => {
     setElements((elements) =>
       getUpdatedElementsAfterNodeAddition({
@@ -69,13 +123,13 @@ const App = () => {
       .filter((x) => x.target)
       .map((x) => ({ ...x, data: { ...x.data, onAddNodeCallback } }));
     setElements([...nodes, ...edges]);
-  }, []);
-
+  }, [initialElements]);
+  console.log(elements)
   return (
     <div className="App">
       <div className="flex flex-row w-full">
+        <RightPanel setInitialElements={setInitialElements}/>
         <Layout elements={elements} />
-        <RightPanel/>
         {/* <PermanentDrawerRight/> */}
         {/* <Drawer opened={true} position="right"  overlayProps={{ opacity: 0, blur: 0 }} withCloseButton={false}>
             

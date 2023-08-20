@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useCallback, useState } from 'react';
 import { IconPlus } from '@tabler/icons-react';
 import "./index.scss";
 import { styled } from '@mui/material/styles';
@@ -9,9 +9,63 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import MultipleOptions from './components/MultipleOptions';
+import { useReactFlow } from 'react-flow-renderer';
+import { initialElements } from './Data/Elements1';
 
+export default function RightPanel({setInitialElements}){
+  const [initialElements1,setInitialElements1] = useState(
+    [
+      {
+        id: "e1-2",
+        source: "1",
+        target: "2",
+        type: "condition",
+      },
+      {
+        id: "e2-3",
+        source: "2",
+        target: "3",
+        type: "condition",
+      },
+      {
+        id: "e3-4",
+        source: "3",
+        target: "4",
+        type: "condition",
+        data: {
+          title: "Default condition",
+          disabled: true,
+        },
+      },
+      {
+        id: "e3-5",
+        source: "3",
+        target: "5",
+        type: "condition",
+        data: {
+          title: "Editable branch",
+        },
+      },
+      {
+        id: "e4-6",
+        source: "4",
+        target: "6",
+        type: "condition",
+      },
+      {
+        id: "e5-6",
+        source: "5",
+        target: "6",
+        type: "condition",
+      },
+      {
+        id: "e6-7",
+        source: "6",
+        target: "7",
+        type: "condition",
+      },
 
-export default function RightPanel(){
+  ]);
     const [count,setCount] = useState(1)
     const [labelObj, setLabelObj] = useState({
       label1: '',
@@ -24,7 +78,51 @@ export default function RightPanel(){
       t3: true
 
     })
+    // let nodeId = 0;
+   
+    //   const reactFlowInstance = useReactFlow();
+    //   const onClick = useCallback(() => {
+    //     const id = `${++nodeId}`;
+    //     const newNode = {
+    //       id,
+    //       position: {
+    //         x: 0,
+    //         y: 0,
+    //       },
+    //       data: {
+    //         title: "Trigger",
+    //         description: `${labelObj.label1} || ${labelObj.label2} || ${labelObj.label3}`,
+    //         stats: {
+    //           started: 0,
+    //         },
+    //       },
+    //     };
+    //     reactFlowInstance.addNodes(newNode);
+    //   }, []);
+    const position = { x: 0, y: 0 };
 
+ 
+    const node=     [{
+     id: "1",
+     type: "source",
+     data: {
+       title: "Trigger",
+       description: "When subscriber joins group(s)",
+       stats: {
+         started: 0,
+       },
+     },
+     position,
+     style: {
+       width: 250,
+     },
+   }]
+    const handleAddTrigger = ()=>{
+      console.log('addTriggerr');
+      console.log(node)
+      setInitialElements(prev => [...prev, ...node]);
+    }
+  
     const handleClick = () =>{
       setCount(prevState => prevState += 1)
     }
@@ -45,7 +143,6 @@ export default function RightPanel(){
       setLabelObj({ ...labelObj,
         label3: event.target.value})
     }
-    console.log(labelObj)
 
     const data = [
         {
@@ -265,7 +362,7 @@ export default function RightPanel(){
             <div className='w-full h-[1px] rounded-full bg-[#343638] my-[32px] opacity-[10%]'/>
             <div className='flex flex-row space-x-[24px] justify-center items-center mx-[24px]'>
               <button className='px-[24px] py-[8px] text-[14px] rounded-sm font-inter'>Cancel</button>
-              <button className='px-[24px] py-[8px] text-[14px] bg-[#627dde] text-white rounded-md font-inter'>Save</button>
+              <button className='px-[24px] py-[8px] text-[14px] bg-[#627dde] text-white rounded-md font-inter' onClick={handleAddTrigger}>Save</button>
             </div>
           </div>
         </div>

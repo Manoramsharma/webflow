@@ -8,7 +8,6 @@ import { nodeTypes } from "./Nodes";
 import { edgeTypes } from "./Edges";
 import { getLayoutedElements } from "./Utils/WorkflowLayoutUtils";
 import "./Automation.css";
-import data from "./Data/Elements2";
 
 export const Automation = (props) => {
   const { elements } = props;
@@ -37,6 +36,7 @@ export const Automation = (props) => {
           edgeTypes={edgeTypes}
           zoomOnScroll={false}
           zoomOnPinch={false}
+          fitView
           panOnScroll
           panOnDrag
           preventScrolling
