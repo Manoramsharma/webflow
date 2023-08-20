@@ -10,7 +10,6 @@ import RightPanel from "./rightPanel";
 const App = () => {
   const [elements, setElements] = React.useState([]);
   const [initialElements, setInitialElements] = React.useState([
-    [
       {
         id: "e1-2",
         source: "1",
@@ -60,7 +59,6 @@ const App = () => {
         target: "7",
         type: "condition",
       },
-    ]
   ]);
 // const updateData =(data) =>{
 //   setInitialElements(...initialElements, data)

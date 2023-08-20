@@ -66,7 +66,8 @@ export default function RightPanel({setInitialElements}){
       },
 
   ]);
-    const [count,setCount] = useState(1)
+  const [count,setCount] = useState(1)
+    let [nodeId,setNodeId] = useState(0)
     const [labelObj, setLabelObj] = useState({
       label1: '',
       label2: '',
@@ -78,8 +79,40 @@ export default function RightPanel({setInitialElements}){
       t3: true
 
     })
-    // let nodeId = 0;
    
+   React.useEffect(()=>{
+    let node;
+    if(nodeId===1){
+      node=    {
+        id: `${nodeId}`,
+        type: "source",
+        data: {
+          title: "Trigger",
+          description: `${labelObj.label1|| labelObj.label2 || labelObj.label3}`,
+          stats: {
+           started:0,
+          },
+        },
+        position,
+      }
+    }else if(nodeId>1){
+      node=    {
+        id: `${nodeId}`,
+        type: "email",
+        data: {
+          title: "Trigger",
+          description: `${labelObj.label1|| labelObj.label2 || labelObj.label3}`,
+          stats: {
+            running: 18,
+          error: 1,
+          },
+        },
+        position,
+      }
+      
+    }
+    setInitialElements(prev => [...prev,{...node}]);
+   },[nodeId])
     //   const reactFlowInstance = useReactFlow();
     //   const onClick = useCallback(() => {
     //     const id = `${++nodeId}`;
@@ -102,25 +135,10 @@ export default function RightPanel({setInitialElements}){
     const position = { x: 0, y: 0 };
 
  
-    const node=     [{
-     id: "1",
-     type: "source",
-     data: {
-       title: "Trigger",
-       description: "When subscriber joins group(s)",
-       stats: {
-         started: 0,
-       },
-     },
-     position,
-     style: {
-       width: 250,
-     },
-   }]
     const handleAddTrigger = ()=>{
+        setNodeId(nodeId+1);
+      console.log(nodeId)
       console.log('addTriggerr');
-      console.log(node)
-      setInitialElements(prev => [...prev, ...node]);
     }
   
     const handleClick = () =>{

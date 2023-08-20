@@ -36,7 +36,6 @@ export const Automation = (props) => {
           edgeTypes={edgeTypes}
           zoomOnScroll={false}
           zoomOnPinch={false}
-          fitView
           panOnScroll
           panOnDrag
           preventScrolling

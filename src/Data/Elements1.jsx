@@ -1,34 +1,34 @@
 const position = { x: 0, y: 0 };
 
 const nodes = [
-  // {
-  //   id: "1",
-  //   type: "source",
-  //   data: {
-  //     title: "Source",
-  //     description: "Automations Database contacts",
-  //     stats: {
-  //       started: 0,
-  //     },
-  //   },
-  //   position,
-  //   style: {
-  //     width: 250,
-  //   },
-  // },
-  // {
-  //   id: "2",
-  //   type: "email",
-  //   data: {
-  //     title: "Email",
-  //     description: "Send message to contacts.",
-  //     stats: {
-  //       running: 18,
-  //       error: 1,
-  //     },
-  //   },
-  //   position,
-  // },
+  {
+    id: "1",
+    type: "source",
+    data: {
+      title: "Source",
+      description: "Automations Database contacts",
+      stats: {
+        started: 0,
+      },
+    },
+    position,
+    style: {
+      width: 250,
+    },
+  },
+  {
+    id: "2",
+    type: "email",
+    data: {
+      title: "Email",
+      description: "Send message to contacts.",
+      stats: {
+        running: 18,
+        error: 1,
+      },
+    },
+    position,
+  },
   // {
   //   id: "3",
   //   type: "waitThenCheck",
