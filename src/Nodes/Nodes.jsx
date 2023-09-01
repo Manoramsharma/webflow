@@ -1,6 +1,9 @@
 import { BaseNode, EmptyBaseNode } from "./Base";
 import { Handle, Position } from "react-flow-renderer";
 import "./Style.scss";
+import { EmailNode } from "./email";
+import EdgeAddButton from "../Buttons/EdgeAddButton/EdgeAddButton";
+const [buttonWidth, buttonHeight] = [100, 40];
 
 const handleNodeClick = (props) => {
   const { data, id } = props;
@@ -28,6 +31,17 @@ export const Action = (props) => (
   <div className="NodeWrapper">
     <Handle type="target" position={Position.Top} className="NodePort" />
     <BaseNode
+      {...props}
+      onNodeClick={() => handleNodeClick(props)}
+      onCloseIconClick={(event) => onCloseIconClick(event, props)}
+    />
+    <Handle type="source" position={Position.Bottom} className="NodePort" />
+  </div>
+);
+export const Welemail = (props) => (
+  <div className="NodeWrapper">
+    <Handle type="target" position={Position.Top} className="NodePort" />
+    <EmailNode
       {...props}
       onNodeClick={() => handleNodeClick(props)}
       onCloseIconClick={(event) => onCloseIconClick(event, props)}

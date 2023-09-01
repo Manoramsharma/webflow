@@ -68,14 +68,14 @@ const nodes = [
   //   },
   //   position,
   // },
-  // {
-  //   id: "6",
-  //   type: "empty",
-  //   data: {},
-  //   position,
-  //   height: 6,
-  //   mergeNodeOfParentId: "3",
-  // },
+  {
+    id: "6",
+    type: "empty",
+    data: {},
+    position,
+    height: 6,
+    mergeNodeOfParentId: "3",
+  },
   // {
   //   id: "7",
   //   type: "end",

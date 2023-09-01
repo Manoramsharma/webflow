@@ -1,13 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import { ConfigureStore } from "./Redux/ConfigureStore";
+import { ReactFlowProvider } from "react-flow-renderer";
+
+const store = ConfigureStore();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+      <Provider store={store} >
+        <ReactFlowProvider store={store}>
+        <App/>
+        </ReactFlowProvider>
+   </Provider>
   </React.StrictMode>
 );
 

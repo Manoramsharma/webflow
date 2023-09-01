@@ -16,54 +16,66 @@ export default function RightPanel({setInitialElements}){
   const [initialElements1,setInitialElements1] = useState(
     [
       {
+        id: "2",
+        data: {},
+        type: "empty",
+        position: { x: 0, y: 0 },
+      },
+      {
         id: "e1-2",
         source: "1",
         target: "2",
         type: "condition",
-      },
-      {
-        id: "e2-3",
-        source: "2",
-        target: "3",
-        type: "condition",
-      },
-      {
-        id: "e3-4",
-        source: "3",
-        target: "4",
-        type: "condition",
-        data: {
-          title: "Default condition",
-          disabled: true,
-        },
-      },
-      {
-        id: "e3-5",
-        source: "3",
-        target: "5",
-        type: "condition",
-        data: {
-          title: "Editable branch",
-        },
-      },
-      {
-        id: "e4-6",
-        source: "4",
-        target: "6",
-        type: "condition",
-      },
-      {
-        id: "e5-6",
-        source: "5",
-        target: "6",
-        type: "condition",
-      },
-      {
-        id: "e6-7",
-        source: "6",
-        target: "7",
-        type: "condition",
-      },
+      }
+      // {
+      //   id: "e1-2",
+      //   source: "1",
+      //   target: "2",
+      //   type: "condition",
+      // },
+      // {
+      //   id: "e2-3",
+      //   source: "2",
+      //   target: "3",
+      //   type: "condition",
+      // },
+      // {
+      //   id: "e3-4",
+      //   source: "3",
+      //   target: "4",
+      //   type: "condition",
+      //   data: {
+      //     title: "Default condition",
+      //     disabled: true,
+      //   },
+      // },
+      // {
+      //   id: "e3-5",
+      //   source: "3",
+      //   target: "5",
+      //   type: "condition",
+      //   data: {
+      //     title: "Editable branch",
+      //   },
+      // },
+      // {
+      //   id: "e4-6",
+      //   source: "4",
+      //   target: "6",
+      //   type: "condition",
+      // },
+      // {
+      //   id: "e5-6",
+      //   source: "5",
+      //   target: "6",
+      //   type: "condition",
+      // },
+      // {
+      //   id: "e6-7",
+      //   source: "6",
+      //   target: "7",
+      //   type: "condition",
+      // },
 
   ]);
   const [count,setCount] = useState(1)
@@ -81,9 +93,9 @@ export default function RightPanel({setInitialElements}){
     })
    
    React.useEffect(()=>{
-    let node;
-    if(nodeId===1){
-      node=    {
+   
+   let   node=    [
+    {
         id: `${nodeId}`,
         type: "source",
         data: {
@@ -94,24 +106,11 @@ export default function RightPanel({setInitialElements}){
           },
         },
         position,
-      }
-    }else if(nodeId>1){
-      node=    {
-        id: `${nodeId}`,
-        type: "email",
-        data: {
-          title: "Trigger",
-          description: `${labelObj.label1|| labelObj.label2 || labelObj.label3}`,
-          stats: {
-            running: 18,
-          error: 1,
-          },
-        },
-        position,
-      }
-      
-    }
-    setInitialElements(prev => [...prev,{...node}]);
+      },
+    
+    ]
+  
+    setInitialElements(prev => [...prev,...node]);
    },[nodeId])
     //   const reactFlowInstance = useReactFlow();
     //   const onClick = useCallback(() => {

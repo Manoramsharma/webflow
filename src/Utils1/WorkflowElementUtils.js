@@ -29,6 +29,36 @@ const getTitleAndDescription = (type) => {
   }
 };
 
+const getUpdatedElementsAfterSourceNodeAddition = ({
+  elements,
+  newNodeId,
+  onAddNodeCallback,
+}) => {
+  const clonedElements = _.cloneDeep(elements);
+  console.log("in update source node",clonedElements);
+  const emptyNode1Id = uuidv4();
+  const emptyNode1 = {
+    id: emptyNode1Id,
+    type: "empty",
+    data: {},
+    position,
+    height: 6,
+    // width: 40,
+  };
+  const newEdge = {
+    id: uuidv4(),
+    source: newNodeId,
+    target: emptyNode1Id,
+    type: "condition",
+    data: { onAddNodeCallback },
+  };
+  clonedElements.push(...[
+    newEdge,
+    emptyNode1
+  ]);
+  return clonedElements;
+};
+
 const getUpdatedElementsAfterActionNodeAddition = ({
   elements,
   newNodeId,
@@ -36,6 +66,7 @@ const getUpdatedElementsAfterActionNodeAddition = ({
   onAddNodeCallback,
 }) => {
   const clonedElements = _.cloneDeep(elements);
+ 
   const newEdge = {
     id: uuidv4(),
     source: newNodeId,
@@ -158,7 +189,7 @@ const getUpdatedElementsAfterNodeAddition = ({
       onNodeClickCallback,
       onDeleteNodeCallback,
     },
-    position,
+    position: { x: 0, y: 2000 }
   };
   const clonedElements = _.cloneDeep(elements);
   const targetEdgeIndex = clonedElements.findIndex(
@@ -181,6 +212,12 @@ const getUpdatedElementsAfterNodeAddition = ({
         onAddNodeCallback,
       });
     default:
+      // return getUpdatedElementsAfterSourceNodeAddition({
+      //   elements: clonedElements,
+      //   newNodeId,
+      //   onAddNodeCallback,
+
+      // })
       return getUpdatedElementsAfterActionNodeAddition({
         elements: clonedElements,
         newNodeId,

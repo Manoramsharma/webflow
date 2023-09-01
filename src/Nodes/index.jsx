@@ -1,8 +1,11 @@
 import * as Node from "./Nodes";
+import ConditionTypeNode from "../flowcomponents/ConditionTypeNode"
+import ButtonTypeNode from "../flowcomponents/ButtonTypeNode";
 
 export const nodeTypes = {
   source: Node.Source,
-  email: Node.Action,
+  selectorNode: ButtonTypeNode,
+  email: Node.Welemail,
   whatsapp: Node.Action,
   pushNotify: Node.Action,
   sms: Node.Action,

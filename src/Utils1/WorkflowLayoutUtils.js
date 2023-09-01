@@ -9,14 +9,20 @@ const getLayoutedElements = (_elements) => {
   const elements = _.cloneDeep(_elements);
   const dagreGraph = new dagre.graphlib.Graph();
 
+  const nodes = elements.filter((x) => !x.target);
+
+
   dagreGraph.setDefaultEdgeLabel(() => ({}));
   dagreGraph.setGraph({ rankdir: "TB" });
 
   elements.forEach((el) => {
+    const currNode = nodes.find((node) => node.id === el.id);
+    let currHeight = currNode == null ? 200 : 80;
+    let currWidth = currNode == null ? 10 : 250;
     if (isNode(el)) {
       dagreGraph.setNode(el.id, {
-        width: el.width || nodeWidth,
-        height: el.height || nodeHeight,
+        width: currWidth,
+        height: currHeight+10,
       });
     } else {
       dagreGraph.setEdge(el.source, el.target);
@@ -26,6 +32,9 @@ const getLayoutedElements = (_elements) => {
   dagre.layout(dagreGraph);
 
   return elements.map((el) => {
+    const currNode = nodes.find((node) => node.id === el.id);
+    let currHeight = currNode == null ? 200 :80;
+    let currWidth = currNode == null ? 100 : 250;
     if (isNode(el)) {
       const nodeWithPosition = dagreGraph.node(el.id);
       el.targetPosition = "top";
@@ -33,9 +42,9 @@ const getLayoutedElements = (_elements) => {
       el.position = {
         x:
           nodeWithPosition.x -
-          (el.width || nodeWidth) / 2 +
+          currWidth / 2 +
           Math.random() / 1000,
-        y: nodeWithPosition.y - (el.height || nodeHeight) / 2,
+        y: nodeWithPosition.y - currHeight/ 2,
       };
     }
     return el;

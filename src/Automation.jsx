@@ -6,7 +6,7 @@ import ReactFlow, {
 } from "react-flow-renderer";
 import { nodeTypes } from "./Nodes";
 import { edgeTypes } from "./Edges";
-import { getLayoutedElements } from "./Utils/WorkflowLayoutUtils";
+import { getLayoutedElements } from "./Utils1/WorkflowLayoutUtils";
 import "./Automation.css";
 
 export const Automation = (props) => {
