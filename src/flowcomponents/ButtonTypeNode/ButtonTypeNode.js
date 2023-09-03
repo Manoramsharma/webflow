@@ -9,9 +9,7 @@ import { Handle } from "react-flow-renderer";
 import styles from "./ButtonTypeNode.module.css";
 import { useDispatch } from "react-redux";
 import OptionSelection from "../OptionSelection";
-import EdgeAddButton from "../../Buttons/EdgeAddButton/EdgeAddButton";
 import {useStore} from "../../store";
-const [buttonWidth, buttonHeight] = [100, 40];
 
 
 const ButtonTypeNode = (props) => {
@@ -27,22 +25,22 @@ const ButtonTypeNode = (props) => {
     markerEndId,
     data,
   } = props;
-  const edgePath = getBezierPath({
-    sourceX,
-    sourceY,
-    sourcePosition,
-    targetX,
-    targetY,
-    targetPosition,
-  });
-  const markerEnd = getMarkerEnd(arrowHeadType, markerEndId);
+  // const edgePath = getBezierPath({
+  //   sourceX,
+  //   sourceY,
+  //   sourcePosition,
+  //   targetX,
+  //   targetY,
+  //   targetPosition,
+  // });
+  // const markerEnd = getMarkerEnd(arrowHeadType, markerEndId);
 
-  const [edgeCenterX, edgeCenterY] = getEdgeCenter({
-    sourceX,
-    sourceY,
-    targetX,
-    targetY,
-  });
+  // const [edgeCenterX, edgeCenterY] = getEdgeCenter({
+  //   sourceX,
+  //   sourceY,
+  //   targetX,
+  //   targetY,
+  // });
 
   const { isAddButtonHidden } = data;
   const dispatch = useDispatch();
@@ -65,7 +63,6 @@ const ButtonTypeNode = (props) => {
       }
     >
       <Handle type="target" position="top" className={styles.Handle} />
-      <OptionSelection/>
       <button
         className={styles.Button}
         onClick={(event) => {

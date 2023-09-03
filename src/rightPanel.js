@@ -1,117 +1,20 @@
-import React, { forwardRef, useCallback, useState } from 'react';
-import { IconPlus } from '@tabler/icons-react';
+import React, { useState } from 'react';
 import "./index.scss";
 import { styled } from '@mui/material/styles';
-import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import MultipleOptions from './components/MultipleOptions';
-import { useReactFlow } from 'react-flow-renderer';
-import { initialElements } from './Data/Elements1';
+import {useStore} from "./store";
 
 export default function RightPanel({setInitialElements}){
-  const [initialElements1,setInitialElements1] = useState(
-    [
-      {
-        id: "2",
-        data: {},
-        type: "empty",
-        position: { x: 0, y: 0 },
-      },
-      {
-        id: "e1-2",
-        source: "1",
-        target: "2",
-        type: "condition",
-      }
-      // {
-      //   id: "e1-2",
-      //   source: "1",
-      //   target: "2",
-      //   type: "condition",
-      // },
-      // {
-      //   id: "e2-3",
-      //   source: "2",
-      //   target: "3",
-      //   type: "condition",
-      // },
-      // {
-      //   id: "e3-4",
-      //   source: "3",
-      //   target: "4",
-      //   type: "condition",
-      //   data: {
-      //     title: "Default condition",
-      //     disabled: true,
-      //   },
-      // },
-      // {
-      //   id: "e3-5",
-      //   source: "3",
-      //   target: "5",
-      //   type: "condition",
-      //   data: {
-      //     title: "Editable branch",
-      //   },
-      // },
-      // {
-      //   id: "e4-6",
-      //   source: "4",
-      //   target: "6",
-      //   type: "condition",
-      // },
-      // {
-      //   id: "e5-6",
-      //   source: "5",
-      //   target: "6",
-      //   type: "condition",
-      // },
-      // {
-      //   id: "e6-7",
-      //   source: "6",
-      //   target: "7",
-      //   type: "condition",
-      // },
-
-  ]);
   const [count,setCount] = useState(1)
-    let [nodeId,setNodeId] = useState(0)
     const [labelObj, setLabelObj] = useState({
       label1: '',
       label2: '',
       label3: ''
     })
-    const [triggerToggle, setTriggerToggle] = useState({
-      t1: true,
-      t2: true,
-      t3: true
-
-    })
    
-   React.useEffect(()=>{
-   
-   let   node=    [
-    {
-        id: `${nodeId}`,
-        type: "source",
-        data: {
-          title: "Trigger",
-          description: `${labelObj.label1|| labelObj.label2 || labelObj.label3}`,
-          stats: {
-           started:0,
-          },
-        },
-        position,
-      },
-    
-    ]
-  
-    setInitialElements(prev => [...prev,...node]);
-   },[nodeId])
     //   const reactFlowInstance = useReactFlow();
     //   const onClick = useCallback(() => {
     //     const id = `${++nodeId}`;
@@ -131,13 +34,37 @@ export default function RightPanel({setInitialElements}){
     //     };
     //     reactFlowInstance.addNodes(newNode);
     //   }, []);
-    const position = { x: 0, y: 0 };
+   
 
- 
+    const initialElements= [
+      {
+        id: "1",
+        data: { label: `${labelObj.label1 || labelObj.label2 || labelObj.label3}` },
+        style: {
+          fontSize: "var(--font-16)",
+          fontWeight: "500",
+        },
+        position: { x: 0, y: 0 },
+      },
+      {
+        id: "2",
+        data: { label: "Node 3" },
+        type: "selectorNode",
+        position: { x: 0, y: 0 },
+      },
+      {
+        id: "1-2",
+        source: "1",
+        target: "2",
+        type: "smoothedge",
+      },
+    ]
     const handleAddTrigger = ()=>{
-        setNodeId(nodeId+1);
-      console.log(nodeId)
-      console.log('addTriggerr');
+      console.log('handleAddTriggerß')
+      useStore.getState().handleNode({
+        type: "INITIAL_ELEMENTS",
+        initialElements: initialElements,
+      })
     }
   
     const handleClick = () =>{

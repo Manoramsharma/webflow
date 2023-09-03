@@ -1,9 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
 import ReactFlow, {
   ReactFlowProvider,
-  addEdge,
-  removeElements,
   isNode,
   Background,
   MiniMap,
@@ -15,24 +12,24 @@ import dagre from "dagre";
 import styles from "./Home.module.css";
 import ButtonEdge from "../../flowcomponents/ButtonEdge";
 import PopUp from "../../flowcomponents/PopUp";
-import OptionSelection from "../../flowcomponents/OptionSelection";
 import ButtonTypeNode from "../../flowcomponents/ButtonTypeNode";
 import SmsTypeNode from "../../flowcomponents/SmsTypeNode";
 import ConditionTypeNode from "../../flowcomponents/ConditionTypeNode";
 import DelayTypeNode from "../../flowcomponents/DelayTypeNode";
 import CorrectNodeType from "../../flowcomponents/ConditionNodeType/CorrectNodeType";
 import WrongNodeType from "../../flowcomponents/ConditionNodeType/WrongNodeType";
+import EmailTypeNode from "../../flowcomponents/EmailTypeNode/EmailTypeNode";
 
 
-const NodeDetails = () => {
+// const NodeDetails = () => {
  
-  const nodes = useStore.getState().nodes;
-  useStore.getState().handleNode({
-    type: "SET_NODES", 
-    nodes: nodes
-  })
-  return <></>;
-};
+//   const nodes = useStore((state)=>state.nodes);
+//   useStore.getState().handleNode({
+//     type: "SET_NODES", 
+//     nodes: nodes
+//   })
+//   return <></>;
+// };
 
 const edgeTypes = {
   buttonedge: ButtonEdge,
@@ -40,6 +37,7 @@ const edgeTypes = {
 const nodeTypes = {
   selectorNode: ButtonTypeNode,
   smsNode: SmsTypeNode,
+  emailNode: EmailTypeNode,
   conditionNode: ConditionTypeNode,
   delayNode: DelayTypeNode,
   correctNode: CorrectNodeType,
@@ -50,13 +48,10 @@ const Home = (props) => {
   const dagreGraph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
   const triggerRef = useRef(null);
-  const nodeWidth = 150;
-  const nodeHeight = 200;
-
-  const elements = useStore.getState().initialElements;
-  const popUpState = useStore.getState().popUpState;
-  const componentToRender = useStore.getState().componentToRender;
-  const nodes = useStore.getState().nodes;
+  const elements = useStore((state)=>state.initialElements) 
+  const popUpState = useStore((state)=>state.popUpState)
+  const componentToRender = useStore((state)=>state.componentToRender)
+  const nodes = useStore((state)=>state.nodes);
 
 console.log(elements, popUpState, componentToRender, nodes, "store fetched")
   // const onLoad = (reactFlowInstance) => {
@@ -80,13 +75,13 @@ console.log(elements, popUpState, componentToRender, nodes, "store fetched")
     dagreGraph.setGraph({ rankdir: direction, ranker: "longest-path" });
 
     elements.forEach((el) => {
-      const currNode = nodes.find((node) => node.id === el.id);
-      let currHeight = currNode == null ? 200 : currNode.__rf.height;
-      let currWidth = currNode == null ? 10 : currNode.__rf.width;
+      // const currNode = nodes.find((node) => node.id === el.id);
+      // let currHeight = currNode == null ? 200 : currNode.__rf.height;
+      // let currWidth = currNode == null ? 10 : currNode.__rf.width;
       if (isNode(el)) {
         dagreGraph.setNode(el.id, {
-          width: currWidth,
-          height: currHeight + 10,
+          width: 350,
+          height: 250,
         });
       } else {
         dagreGraph.setEdge(el.source, el.target);
@@ -96,9 +91,9 @@ console.log(elements, popUpState, componentToRender, nodes, "store fetched")
     dagre.layout(dagreGraph);
 
     return elements.map((el) => {
-      const currNode = nodes.find((node) => node.id === el.id);
-      let currHeight = currNode == null ? 200 : currNode.__rf.height;
-      let currWidth = currNode == null ? 100 : currNode.__rf.width;
+      // const currNode = nodes.find((node) => node.id === el.id);
+      // let currHeight = currNode == null ? 200 : currNode.__rf.height;
+      // let currWidth = currNode == null ? 100 : currNode.__rf.width;
       if (isNode(el)) {
         const nodeWithPosition = dagreGraph.node(el.id);
         el.targetPosition = isHorizontal ? "left" : "top";
@@ -106,10 +101,10 @@ console.log(elements, popUpState, componentToRender, nodes, "store fetched")
         let element = document.getElementById(`${styles.ReactFlowWrapper}`);
         let elementWidth = element == null ? 0 : element.offsetWidth;
         el.position = {
-          x: nodeWithPosition.x - currWidth / 2 + elementWidth / 2 - 75,
+          x: nodeWithPosition.x - 200 + elementWidth / 2 + 75,
           // elementWidth / 2 +
           // Math.random() / 1000,
-          y: nodeWithPosition.y - currHeight / 2,
+          y: nodeWithPosition.y + 100,
         };
       }
 
@@ -117,7 +112,7 @@ console.log(elements, popUpState, componentToRender, nodes, "store fetched")
     });
   };
 
-  const layoutedElements = getLayoutedElements(elements);
+  const [layoutedElements, setLayoutedElements] = useState(getLayoutedElements(elements));
 
   const [nodeElements, setElements] = useState(layoutedElements);
 
@@ -130,6 +125,10 @@ console.log(elements, popUpState, componentToRender, nodes, "store fetched")
 
   console.log(nodeElements,"before reactflow")
 
+  useEffect(()=>{
+    setLayoutedElements(getLayoutedElements(elements))
+    setElements(getLayoutedElements(elements, 'TB'))
+  },[elements])
   return (
     <>
       <div id={styles.ReactFlowWrapper}>
@@ -140,9 +139,9 @@ console.log(elements, popUpState, componentToRender, nodes, "store fetched")
             edgeTypes={edgeTypes}
             nodeTypes={nodeTypes}
             onInit={onInit}
-            nodesDraggable={false}
+            nodesDraggable={true}
           >
-            <NodeDetails />
+            {/* <NodeDetails /> */}
             <Background />
             <MiniMap />
             <Controls />

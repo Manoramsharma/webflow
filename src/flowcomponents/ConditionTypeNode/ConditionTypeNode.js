@@ -8,8 +8,8 @@ import styles from "./ConditionTypeNode.module.css";
 import useStore from "../../store";
 
 function ConditionTypeNode({ id, type }) {
-  const initialElements = useStore.getState().initialElements
-
+  const initialElements = useStore((state)=>state.initialElements);
+  console.log(initialElements,"condition type initial elements")
   const dispatch = useDispatch();
 
   return (
@@ -23,6 +23,7 @@ function ConditionTypeNode({ id, type }) {
         <ButtonCross
           onClick={() => {
             const tempEle = removeNode(initialElements, id, type);
+            console.log(tempEle,"remove button");
             useStore.getState().handleNode({
               type: "INITIAL_ELEMENTS", initialElements: tempEle
             })

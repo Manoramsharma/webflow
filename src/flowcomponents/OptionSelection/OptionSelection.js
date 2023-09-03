@@ -40,6 +40,32 @@ const OptionSelection = () => {
             }, 200);
           }}
         />
+          <SubOptionSelection
+          name="email"
+          callerFunction={() => {
+            const tempInitialElement = addNode(
+              initialElements,
+              edgeId,
+              "emailNode",
+              false,
+              "correct"
+            );
+            setTimeout(() => {
+              useStore.getState().handleNode({
+                type: "INITIAL_ELEMENTS",
+                initialElements: tempInitialElement,
+              });
+              useStore.getState().handlePopUp({
+                type: "HANDLE_POP_UP",
+                popUpState: false,
+              })
+            }, 100);
+            setTimeout(() => {
+              document.getElementById("LayoutButton").click();
+              document.getElementById("LayoutButton").click();
+            }, 200);
+          }}
+        />
         <SubOptionSelection
           name="delay"
           callerFunction={() => {
