@@ -7,7 +7,7 @@ import { FormControl, MenuItem, Select } from '@mui/material';
 import MultipleOptions from './components/MultipleOptions';
 import {useStore} from "./store";
 
-export default function RightPanel({setInitialElements}){
+export default function RightPanel(){
   const [count,setCount] = useState(1)
     const [labelObj, setLabelObj] = useState({
       label1: '',
@@ -206,7 +206,7 @@ export default function RightPanel({setInitialElements}){
                     return(
                         <MenuItem value = {item.value}>
                           <div className='flex flex-row justify-between items-start whitespace-normal space-x-[8px]'>
-                            <img className='w-[16px] h-[16px]' src={item.image}/>
+                            <img className='w-[16px] h-[16px]' src={item.image} alt=''/>
                             <div className='flex flex-col w-[300px]'>
                               <h1 className='font-semiBold font-inter text-[12px]'>{item.value}</h1>
                               <p className='font-inter text-[10px] opacity-80'>{item.description}</p>
@@ -239,7 +239,7 @@ export default function RightPanel({setInitialElements}){
                     return(
                         <MenuItem value={item.value}>
                           <div className='flex flex-row justify-between items-start whitespace-normal space-x-[8px]'>
-                            <img className='w-[16px] h-[16px]' src={item.image}/>
+                            <img className='w-[16px] h-[16px]' src={item.image} alt=''/>
                             <div className='flex flex-col w-[300px]'>
                               <h1 className='font-semiBold font-inter text-[12px]'>{item.value}</h1>
                               <p className='font-inter text-[10px] opacity-80'>{item.description}</p>
@@ -275,7 +275,7 @@ export default function RightPanel({setInitialElements}){
                     return(
                         <MenuItem value = {item.label}>
                           <div className='flex flex-row justify-between items-start whitespace-normal space-x-[8px]'>
-                            <img className='w-[16px] h-[16px]' src={item.image}/>
+                            <img className='w-[16px] h-[16px]' src={item.image} alt=''/>
                             <div className='flex flex-col w-[300px]'>
                               <h1 className='font-semiBold font-inter text-[12px]'>{item.value}</h1>
                               <p className='font-inter text-[10px] opacity-80'>{item.description}</p>
@@ -290,10 +290,10 @@ export default function RightPanel({setInitialElements}){
             </div>
             </>}
             {count >= 3 ? <div className='mx-[24px] px-[8px] py-[2px] bg-[#e9eaeb] text-[#929496] rounded-md w-[150px] flex flex-row items-center justify-between opacity-50 cursor-not-allowed'>
-              <img src="https://img.icons8.com/android/24/plus.png" className='w-[12px] h-[12px]'/>
+              <img src="https://img.icons8.com/android/24/plus.png" className='w-[12px] h-[12px]' alt=''/>
               <button className='text-black font-inter text-[12px] cursor-not-allowed'>Add another trigger</button>
             </div> : <div className='mx-[24px] px-[8px] py-[2px] bg-[#d3d6d9] rounded-md w-[150px] flex flex-row items-center justify-between cursor-pointer'>
-              <img src="https://img.icons8.com/android/24/plus.png" className='w-[12px] h-[12px]'/>
+              <img src="https://img.icons8.com/android/24/plus.png" className='w-[12px] h-[12px]' alt=''/>
               <button className='text-black font-inter text-[12px]' onClick={handleClick}>Add another trigger</button>
             </div>
             }

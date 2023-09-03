@@ -52,6 +52,11 @@ const Home = (props) => {
   const popUpState = useStore((state)=>state.popUpState)
   const componentToRender = useStore((state)=>state.componentToRender)
   const nodes = useStore((state)=>state.nodes);
+  useEffect(()=>{
+    setLayoutedElements(getLayoutedElements(elements))
+    setElements(getLayoutedElements(elements, 'TB'))
+      // eslint-disable-next-line 
+  },[elements])
 
 console.log(elements, popUpState, componentToRender, nodes, "store fetched")
   // const onLoad = (reactFlowInstance) => {
@@ -125,10 +130,6 @@ console.log(elements, popUpState, componentToRender, nodes, "store fetched")
 
   console.log(nodeElements,"before reactflow")
 
-  useEffect(()=>{
-    setLayoutedElements(getLayoutedElements(elements))
-    setElements(getLayoutedElements(elements, 'TB'))
-  },[elements])
   return (
     <>
       <div id={styles.ReactFlowWrapper}>

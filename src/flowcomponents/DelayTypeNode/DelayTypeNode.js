@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./DelayTypeNode.module.css";
 import { Handle } from "react-flow-renderer";
-import { useDispatch, useSelector } from "react-redux";
 import PopUpComponent from "./PopUpComponent";
 import ButtonCross from "../ButtonCross";
 import removeNode from "../../Utils/Helpers/removeNode";

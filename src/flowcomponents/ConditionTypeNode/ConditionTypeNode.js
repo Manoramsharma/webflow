@@ -1,6 +1,5 @@
 import React from "react";
 import { Handle } from "react-flow-renderer";
-import { useDispatch, useSelector } from "react-redux";
 import removeNode from "../../Utils/Helpers/removeNode";
 import swapBranches from "../../Utils/Helpers/swapBranches";
 import ButtonCross from "../ButtonCross";
@@ -9,8 +8,6 @@ import useStore from "../../store";
 
 function ConditionTypeNode({ id, type }) {
   const initialElements = useStore((state)=>state.initialElements);
-  console.log(initialElements,"condition type initial elements")
-  const dispatch = useDispatch();
 
   return (
     <div className={styles.WrapperWrapper}>

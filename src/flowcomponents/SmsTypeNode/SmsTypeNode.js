@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Handle } from "react-flow-renderer";
-import { useDispatch, useSelector } from "react-redux";
 import styles from "./SmsTypeNode.module.css";
 import PopUpComponent from "./PopUpComponent";
 import ButtonCross from "../ButtonCross";
@@ -12,7 +11,6 @@ function SmsTypeNode({ id, type }) {
     name: "",
     smsBody: "",
   });
-  const dispatch = useDispatch();
   const elements = useStore.getState().initialElements;
 
   const handleOnChange = (smsDetails) => {

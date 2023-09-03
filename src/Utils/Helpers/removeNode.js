@@ -1,5 +1,4 @@
 import {
-  isNode,
   isEdge,
 } from "react-flow-renderer";
 

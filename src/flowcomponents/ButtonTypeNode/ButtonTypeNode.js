@@ -1,13 +1,8 @@
 import React from "react";
-import {
-  getBezierPath,
-  getEdgeCenter,
-  getMarkerEnd,
-} from "react-flow-renderer";
+
 import "./Style1.scss";
 import { Handle } from "react-flow-renderer";
 import styles from "./ButtonTypeNode.module.css";
-import { useDispatch } from "react-redux";
 import OptionSelection from "../OptionSelection";
 import {useStore} from "../../store";
 
@@ -15,35 +10,8 @@ import {useStore} from "../../store";
 const ButtonTypeNode = (props) => {
   const {
     id,
-    sourceX,
-    sourceY,
-    targetX,
-    targetY,
-    sourcePosition,
-    targetPosition,
-    arrowHeadType,
-    markerEndId,
-    data,
   } = props;
-  // const edgePath = getBezierPath({
-  //   sourceX,
-  //   sourceY,
-  //   sourcePosition,
-  //   targetX,
-  //   targetY,
-  //   targetPosition,
-  // });
-  // const markerEnd = getMarkerEnd(arrowHeadType, markerEndId);
 
-  // const [edgeCenterX, edgeCenterY] = getEdgeCenter({
-  //   sourceX,
-  //   sourceY,
-  //   targetX,
-  //   targetY,
-  // });
-
-  const { isAddButtonHidden } = data;
-  const dispatch = useDispatch();
   const onEdgeClick = (evt, id) => {
     evt.stopPropagation();
     useStore.getState().handlePopUp({

@@ -5,11 +5,10 @@ import RightPanel from "./rightPanel";
 import Home from "./Containers/Home/Home";
 
 const App = () => {
-  const [initialElements, setInitialElements] = React.useState([]);
   return (
     <div className="App">
       <div className="flex flex-row w-full">
-        <RightPanel setInitialElements={setInitialElements}/>
+        <RightPanel />
     <Home/>
    
     
