@@ -14,7 +14,7 @@ function PopUp({
 
   function handleKeyDowns(e) {
     if (isOpen) {
-      if (e.key == "Escape") {
+      if (e.key === "Escape") {
         if (isClosable && closeFun) {
           closeFun();
         }
@@ -55,6 +55,7 @@ function PopUp({
     return () => {
       document.removeEventListener("keydown", handleKeyDowns);
     };
+         // eslint-disable-next-line 
   }, [isOpen, isClosable]);
 
   return (

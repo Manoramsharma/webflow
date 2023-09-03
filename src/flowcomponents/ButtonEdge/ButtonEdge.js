@@ -4,7 +4,6 @@ import {
   getEdgeCenter,
   getMarkerEnd,
 } from "react-flow-renderer";
-import { useDispatch } from "react-redux";
 import OptionSelection from "../OptionSelection";
 
 import styles from "./ButtonEdge.module.css";
@@ -25,7 +24,6 @@ function ButtonEdge({
   arrowHeadType,
   markerEndId,
 }) {
-  const dispatch = useDispatch();
   const onEdgeClick = (evt, id) => {
     evt.stopPropagation();
     useStore.getState().handlePopUp({

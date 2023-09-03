@@ -1,11 +1,6 @@
-import ReactFlow, {
+import  {
   isNode,
   isEdge,
-  removeElements,
-  addEdge,
-  getOutgoers,
-  getIncomers,
-  getConnectedEdges,
 } from "react-flow-renderer";
 
 const addNode = (initialElements, edgeId, nodeType, isCondition, alignment) => {
@@ -49,7 +44,7 @@ const addNodeWithCondition = (
     position: { x: 0, y: 0 },
   };
   for (let i = 0; i < initialElements.length; i++) {
-    if (initialElements[i].id == edgeId && isEdge(initialElements[i])) {
+    if (initialElements[i].id === edgeId && isEdge(initialElements[i])) {
       initialElements[i].id = `${initialElements[i].source}-${
         numberOfNodes + 1
       }`;
@@ -164,7 +159,7 @@ const addNodeWithCondtionLeaf = (initialElements, nodeId, nodeType) => {
     position: { x: 0, y: 0 },
   };
   for (let i = 0; i < initialElements.length; i++) {
-    if (initialElements[i].target == nodeId && isEdge(initialElements[i])) {
+    if (initialElements[i].target === nodeId && isEdge(initialElements[i])) {
       initialElements[i].id = `${initialElements[i].source}-${
         numberOfNodes + 1
       }`;
@@ -235,7 +230,7 @@ const addNodeWithNoCondition = (initialElements, edgeId, nodeType) => {
   };
 
   for (let i = 0; i < initialElements.length; i++) {
-    if (initialElements[i].id == edgeId && isEdge(initialElements[i])) {
+    if (initialElements[i].id === edgeId && isEdge(initialElements[i])) {
       initialElements[i].id = `${initialElements[i].source}-${
         numberOfNodes + 1
       }`;
@@ -273,7 +268,7 @@ const addNodeWithNoConditionLeaf = (initialElements, nodeId, nodeType) => {
     type: "smoothedge",
   };
   for (let i = 0; i < initialElements.length; i++) {
-    if (initialElements[i].target == nodeId && isEdge(initialElements[i])) {
+    if (initialElements[i].target === nodeId && isEdge(initialElements[i])) {
       initialElements[i].id = `${initialElements[i].source}-${
         numberOfNodes + 1
       }`;

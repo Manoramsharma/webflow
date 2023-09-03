@@ -1,7 +1,6 @@
 import React from "react";
 import { Handle } from "react-flow-renderer";
 import removeNode from "../../Utils/Helpers/removeNode";
-import swapBranches from "../../Utils/Helpers/swapBranches";
 import ButtonCross from "../ButtonCross";
 import styles from "./ConditionTypeNode.module.css";
 import useStore from "../../store";
@@ -36,10 +35,6 @@ function ConditionTypeNode({ id, type }) {
         <button>Edit Condition</button>
         <button
           onClick={() => {
-            const tempELe = swapBranches(initialElements, id, type);
-            useStore.getState().handleNode({
-              type: "INITIAL_ELEMENTS", initialElements: tempELe 
-            })
             setTimeout(() => {
               document.getElementById("LayoutButton").click();
               document.getElementById("LayoutButton").click();

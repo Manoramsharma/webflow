@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import { useDispatch } from "react-redux";
 import OptionSelection from "../../OptionSelection";
 import styles from "./PopUpComponent.module.css";
 import useStore from "../../../store";
@@ -13,8 +12,6 @@ function PopUpComponent({ handleOnChange, inputName, inputSmsBody }) {
       smsBody: details.current.elements.smsBody.value,
     });
   };
-  const dispatch = useDispatch();
-
   return (
     <form
       className={styles.Wrapper}

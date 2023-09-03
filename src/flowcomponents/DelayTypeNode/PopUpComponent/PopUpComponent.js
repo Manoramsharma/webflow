@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import { useDispatch } from "react-redux";
 import OptionSelection from "../../OptionSelection";
 import styles from "./PopUpComponent.module.css";
 import useStore from "../../../store";
@@ -14,7 +13,6 @@ const tempData = [
 
 const PopUpComponent = ({ handleOnChange, inputAmount, inputDelay }) => {
   const delayDetails = useRef(null);
-  const dispatch = useDispatch();
   const handleChange = (event) => {
     event.preventDefault();
     handleOnChange({

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import styles from "./OptionSelection.module.css";
 import SubOptionSelection from "./SubOptionSelction";
 
@@ -9,7 +8,6 @@ import useStore from "../../store";
 const OptionSelection = () => {
   const initialElements = useStore.getState().initialElements
   const edgeId = useStore.getState().edgeId;
-  const dispatch = useDispatch();
   return (
     <div className={styles.WrapperWrapper}>
       <h2 className={styles.Heading}>Add a next step to your workflow</h2>

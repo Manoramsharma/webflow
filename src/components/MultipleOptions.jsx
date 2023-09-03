@@ -1,10 +1,8 @@
-import { Padding } from '@mui/icons-material';
-import { Autocomplete, FormControl, Select, TextField, MenuItem} from '@mui/material';
+import { Autocomplete, FormControl, Select, TextField} from '@mui/material';
 import React, { useState } from 'react'
 
 const MultipleOptions = ({label}) => {
     const [data, setData] = useState([''])
-    const [formData, setFormData] = useState([])
     const [item, setItem] = useState('')
     console.log(item)
     console.log(data)
@@ -20,7 +18,7 @@ const MultipleOptions = ({label}) => {
   return (
     <div>
 
-        {label == "When subscriber joins group(s)" && 
+        {label === "When subscriber joins group(s)" && 
         <>
         <FormControl sx={{ m: 1, width: 300}}>
         <Autocomplete
@@ -51,13 +49,12 @@ const MultipleOptions = ({label}) => {
         </>}
 
 
-        {label == "When subscriber completes a form" && 
+        {label === "When subscriber completes a form" && 
         <>
         <FormControl sx={{ m: 1, minWidth: 300 }} size="small">
         <Autocomplete
             multiple
             id="tags-outlined"
-            options={formData}
             getOptionLabel={(option) => option}
             renderInput={(params) => (
             <div className='flex flex-col'>
@@ -82,7 +79,7 @@ const MultipleOptions = ({label}) => {
         </FormControl>
         </>}
         
-        {label == "When subscriber clicks a link" && 
+        {label === "When subscriber clicks a link" && 
         <div className='flex flex-col'>
         <div className='flex flex-col items-start justify-between px-[8px] space-y-[4px]'>
           <h1 className='font-inter text-[16px] font-semiBold'>Link</h1>
@@ -110,7 +107,7 @@ const MultipleOptions = ({label}) => {
 clicks on the designated URL link in any of your
 email campaigns or automations. */}
 
-        {label == "Updated field" && 
+        {label === "Updated field" && 
         <>
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
             <Select/>
@@ -118,7 +115,7 @@ email campaigns or automations. */}
         </FormControl>
         </>}
 
-        {label == "The anniversary of a date" && 
+        {label === "The anniversary of a date" && 
         <>
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
             <Select/>
@@ -127,7 +124,7 @@ email campaigns or automations. */}
         <TextField id="outlined-basic" label="Outlined" variant="outlined"/>
         <TextField id="outlined-basic" label="Outlined" variant="outlined"/>
         </>}
-        {label == "The exact match of a date" && 
+        {label === "The exact match of a date" && 
         <>
 
         <TextField id="outlined-basic" label="Outlined" variant="outlined"/>

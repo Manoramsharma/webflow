@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Handle } from "react-flow-renderer";
-import { useDispatch, useSelector } from "react-redux";
 import styles from "./EmailTypeNode.module.css";
 import ButtonCross from "../ButtonCross";
 import removeNode from "../../Utils/Helpers/removeNode";
 import useStore from "../../store";
 
 function EmailTypeNode({ id, type }) {
-  const [smsDetails, setSmsDetails] = useState({
-    name: "",
-    smsBody: "",
-  });
-  const dispatch = useDispatch();
+
   const elements = useStore.getState().initialElements;
 
-  const handleOnChange = (smsDetails) => {
-    setSmsDetails(smsDetails);
-  };
 
 //   const handleClick = (event) => {
 //     event.stopPropagation();
@@ -59,7 +51,7 @@ function EmailTypeNode({ id, type }) {
       </div>
       <div className={styles.Wrapper}>
         <h2 className={styles.Heading}>Welcome Email</h2>
-       <img src="./images.jpeg"/>
+       <img src="./images.jpeg" alt=""/>
       </div>
       <Handle type="target" position="top" className={styles.Handle} />
       <Handle type="source" position="bottom" className={styles.Handle} />
