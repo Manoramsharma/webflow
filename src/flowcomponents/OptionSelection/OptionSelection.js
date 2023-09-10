@@ -22,6 +22,12 @@ const OptionSelection = () => {
               false,
               "correct"
             );
+            setTimeout(()=>{
+              useStore.getState().setName({
+                type: 'SET_NAME',
+                nodeName: 'smsNode'
+              })
+            }, 100)
             setTimeout(() => {
               useStore.getState().handleNode({
                 type: "INITIAL_ELEMENTS",
@@ -48,6 +54,12 @@ const OptionSelection = () => {
               false,
               "correct"
             );
+            setTimeout(()=>{
+              useStore.getState().setName({
+                type: 'SET_NAME',
+                nodeName: 'emailNode'
+              })
+            }, 100)
             setTimeout(() => {
               useStore.getState().handleNode({
                 type: "INITIAL_ELEMENTS",
@@ -74,6 +86,12 @@ const OptionSelection = () => {
               false,
               "correct"
             );
+            setTimeout(()=>{
+              useStore.getState().setName({
+                type: 'SET_NAME',
+                nodeName: 'delayNode'
+              })
+            }, 100)
             setTimeout(() => {
               useStore.getState().handleNode({
                 type: "INITIAL_ELEMENTS",
@@ -100,6 +118,12 @@ const OptionSelection = () => {
               true,
               "wrong"
             );
+            setTimeout(()=>{
+              useStore.getState().setName({
+                type: 'SET_NAME',
+                nodeName: 'conditionNode'
+              })
+            }, 100)
             setTimeout(() => {
               useStore.getState().handleNode({
                 type: "INITIAL_ELEMENTS",
