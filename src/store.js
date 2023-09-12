@@ -2,10 +2,11 @@ import {create} from 'zustand';
 import OptionSelection from './flowcomponents/OptionSelection';
 
 export const useStore = create((set) => ({
-    initialElements: [],
+      initialElements: [],
       nodes: [],
       popUpState: false,
       edgeId: "",
+      nodeName: '',
       componentToRender: <OptionSelection />,
       handleNode: (action) => {
         set((state) => {
@@ -53,6 +54,17 @@ export const useStore = create((set) => ({
           }
         });
       },
+      setShow: (action) => {
+        set((state) => {
+          switch(action.type){
+            case 'SET_NAME':
+              return {
+                ...state,
+                nodeName: action.nodeName
+              }
+          }
+        })
+      }
       
 }))
 
