@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import "./index.scss";
-import { styled } from '@mui/material/styles';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import { Button, FormControl, Input, MenuItem, Select, TextField, Typography } from '@mui/material';
-import MultipleOptions from './components/MultipleOptions';
+import { Button, MenuItem, Select, TextField, Typography } from '@mui/material';
 import {useStore} from "./store";
 import Checkbox from '@mui/material/Checkbox';
+import ButtonCross from './flowcomponents/ButtonCross';
 
 export default function SMSBar(){
-  const [count,setCount] = useState(1)
-    const [inputObj, setInputObj] = useState({
+  const [inputObj, setInputObj] = useState({
       name: '',
       subject: '',
       from: '',
@@ -90,66 +86,24 @@ export default function SMSBar(){
         sender: event.target.value})
     }
 
-    
-      const IOSSwitch = styled((props) => (
-        <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-      ))(({ theme }) => ({
-        width: 42,
-        height: 26,
-        padding: 0,
-        '& .MuiSwitch-switchBase': {
-          padding: 0,
-          margin: 2,
-          transitionDuration: '300ms',
-          '&.Mui-checked': {
-            transform: 'translateX(16px)',
-            color: '#fff',
-            '& + .MuiSwitch-track': {
-              backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#627dde',
-              opacity: 1,
-              border: 0,
-            },
-            '&.Mui-disabled + .MuiSwitch-track': {
-              opacity: 0.5,
-            },
-          },
-          '&.Mui-focusVisible .MuiSwitch-thumb': {
-            color: '#E9E9EA',
-            border: '6px solid #fff',
-          },
-          '&.Mui-disabled .MuiSwitch-thumb': {
-            color:
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[600],
-          },
-          '&.Mui-disabled + .MuiSwitch-track': {
-            opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
-          },
-        },
-        '& .MuiSwitch-thumb': {
-          boxSizing: 'border-box',
-          width: 22,
-          height: 22,
-        },
-        '& .MuiSwitch-track': {
-          borderRadius: 26 / 2,
-          backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
-          opacity: 1,
-          transition: theme.transitions.create(['background-color'], {
-            duration: 500,
-          }),
-        },
-      }));
+
+    const handleClick = ()=>{
+      useStore.getState().handlePopupName({
+        type: "HANDLE_POPUP_NAME", popUpName: 'right'
+      })
+    }
     
       const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
     return (
         <div className='flex flex-col justify-between items-start py-[32px] bg-white drop-shadow-lg h-[100vh]'>
           <div className='my-0 flex flex-col w-full items-center space-y-[24px]'>
+          <div className='flex items-end justify-between w-full px-[24px]'>
             <Typography sx={{
               fontSize: '14px'
             }}>Step</Typography>
+            <ButtonCross onClick={handleClick}/>
+            </div>
             <div className='w-full h-[1px] rounded-full bg-[#343638] opacity-[10%]'/>
           </div>
 

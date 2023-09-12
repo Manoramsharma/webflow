@@ -10,8 +10,8 @@ function EmailTypeNode({ id, type }) {
   const elements = useStore.getState().initialElements;
 
 const handleOnClick = ()=>{
-  useStore.getState().handleFormUp({
-    type: "HANDLE_FORM_UP", formUpState: true
+  useStore.getState().handlePopupName({
+    type: "HANDLE_POPUP_NAME", popUpName: 'email'
   })
 }
 //   const handleClick = (event) => {
@@ -32,6 +32,12 @@ const handleOnClick = ()=>{
 
 //   };
 
+const handleDelete = ()=>{
+  useStore.getState().handlePopupName({
+    type: "HANDLE_POPUP_NAME", popUpName: 'right'
+  })
+}
+
   return (
     <div className={styles.WrapperWrapper} onClick={handleOnClick}>
       <div
@@ -42,6 +48,7 @@ const handleOnClick = ()=>{
       >
         <ButtonCross
           onClick={() => {
+            handleDelete()
             const tempEle = removeNode(elements, id, type);
             useStore.getState().handleNode({
               type: "INITIAL_ELEMENTS", initialElements: tempEle

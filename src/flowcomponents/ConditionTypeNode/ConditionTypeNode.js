@@ -8,8 +8,20 @@ import useStore from "../../store";
 function ConditionTypeNode({ id, type }) {
   const initialElements = useStore((state)=>state.initialElements);
 
+  const handleOnClick = ()=>{
+    useStore.getState().handlePopupName({
+      type: "HANDLE_POPUP_NAME", popUpName: 'condition'
+    })
+  }
+
+  const handleDelete = ()=>{
+    useStore.getState().handlePopupName({
+      type: "HANDLE_POPUP_NAME", popUpName: 'right'
+    })
+  }
+
   return (
-    <div className={styles.WrapperWrapper}>
+    <div className={styles.WrapperWrapper} onClick={handleOnClick}>
       <div
         style={{
           display: "flex",
@@ -18,6 +30,7 @@ function ConditionTypeNode({ id, type }) {
       >
         <ButtonCross
           onClick={() => {
+            handleDelete()
             const tempEle = removeNode(initialElements, id, type);
             console.log(tempEle,"remove button");
             useStore.getState().handleNode({

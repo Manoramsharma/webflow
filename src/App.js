@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "antd/dist/antd.min.css";
 import "./index.scss";
 import RightPanel from "./rightPanel";
@@ -7,22 +7,20 @@ import useStore from "./store";
 import SMSBar from './smsBar'
 import EmailBar from "./emailBar";
 import ConditionBar from "./conditionBar";
-import { useState } from "react";
+
 
 const App = () => {
-  const formUpState = useStore((state)=>state.formUpState)
-  const name = useStore.getState().nodeName
-  console.log(name)
-  const [show,setShow] = useState()
+  const popUpName = useStore((state)=>state.popUpName)
+  console.log(popUpName)
   
   return (
     <div className="App">
       <div className="flex flex-row w-full">
         <Home/>
-        <RightPanel />
-        {formUpState && <EmailBar/>}
-        {/* <ConditionBar/>
-        <SMSBar/> */}
+        {popUpName === 'right' && <RightPanel />}
+        {popUpName === 'email' && <EmailBar/>}
+        {popUpName === 'condition' && <ConditionBar/>}
+        {popUpName === 'sms' && <SMSBar/>}
       </div> 
     </div> 
   );

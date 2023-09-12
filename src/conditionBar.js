@@ -1,16 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React , {useState } from 'react';
 import "./index.scss";
-import { styled } from '@mui/material/styles';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import { Button, FormControl, Input, MenuItem, Select, TextField, Typography } from '@mui/material';
-import MultipleOptions from './components/MultipleOptions';
+import { Typography } from '@mui/material';
 import {useStore} from "./store";
 import Checkbox from '@mui/material/Checkbox';
 import EmailCondition from './components/EmailCondition';
+import ButtonCross from './flowcomponents/ButtonCross';
 
 export default function ConditionBar(){
-  const ref = useRef(null)
   const [count,setCount] = useState({
     id1: true,
     id2: false,
@@ -18,87 +14,10 @@ export default function ConditionBar(){
     id4: false,
     id5: false
   })
-    const [inputObj, setInputObj] = useState({
-      name: '',
-      subject: '',
-      from: '',
-      sender: ''
-    })
-    const [activity, setActivity] = React.useState('');
-
-    const handleChange = (event) => {
-      setActivity(event.target.value);
-    };
   
     const [flag,setFlag] = useState(1)
-    //   const reactFlowInstance = useReactFlow();
-    //   const onClick = useCallback(() => {
-    //     const id = `${++nodeId}`;
-    //     const newNode = {
-    //       id,
-    //       position: {
-    //         x: 0,
-    //         y: 0,
-    //       },
-    //       data: {
-    //         title: "Trigger",
-    //         description: `${labelObj.label1} || ${labelObj.label2} || ${labelObj.label3}`,
-    //         stats: {
-    //           started: 0,
-    //         },
-    //       },
-    //     };
-    //     reactFlowInstance.addNodes(newNode);
-    //   }, []);
-   
 
-    // const initialElements= [
-    //   {
-    //     id: "1",
-    //     data: { label: `${labelObj.label1 || labelObj.label2 || labelObj.label3}` },
-    //     style: {
-    //       fontSize: "var(--font-16)",
-    //       fontWeight: "500",
-    //     },
-    //     position: { x: 0, y: 0 },
-    //   },
-    //   {
-    //     id: "2",
-    //     data: { label: "Node 3" },
-    //     type: "selectorNode",
-    //     position: { x: 0, y: 0 },
-    //   },
-    //   {
-    //     id: "1-2",
-    //     source: "1",
-    //     target: "2",
-    //     type: "smoothedge",
-    //   },
-    // ]
-    // const handleAddTrigger = ()=>{
-    //   console.log('handleAddTrigger')
-    //   useStore.getState().handleNode({
-    //     type: "INITIAL_ELEMENTS",
-    //     initialElements: initialElements,
-    //   })
-    // }
     console.log(count.length)
-    const handleChangeName = (event)=>{
-      setInputObj({ ...inputObj,
-        name: event.target.value})
-    }
-    const handleChangeSub = (event)=>{
-      setInputObj({ ...inputObj,
-        subject: event.target.value})
-    }
-    const handleChangeFrom = (event)=>{
-      setInputObj({ ...inputObj,
-        from: event.target.value})
-    }
-    const handleChangeSender = (event)=>{
-      setInputObj({ ...inputObj,
-        sender: event.target.value})
-    }
 
     const handleClick = ()=>{
       if(!count.id1){
@@ -152,68 +71,26 @@ export default function ConditionBar(){
           setCount({...count, id5: false})
           setFlag(state => state - 1)
           return
+        default: 
+          return
       }
     }
 
-      const IOSSwitch = styled((props) => (
-        <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-      ))(({ theme }) => ({
-        width: 42,
-        height: 26,
-        padding: 0,
-        '& .MuiSwitch-switchBase': {
-          padding: 0,
-          margin: 2,
-          transitionDuration: '300ms',
-          '&.Mui-checked': {
-            transform: 'translateX(16px)',
-            color: '#fff',
-            '& + .MuiSwitch-track': {
-              backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#627dde',
-              opacity: 1,
-              border: 0,
-            },
-            '&.Mui-disabled + .MuiSwitch-track': {
-              opacity: 0.5,
-            },
-          },
-          '&.Mui-focusVisible .MuiSwitch-thumb': {
-            color: '#E9E9EA',
-            border: '6px solid #fff',
-          },
-          '&.Mui-disabled .MuiSwitch-thumb': {
-            color:
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[600],
-          },
-          '&.Mui-disabled + .MuiSwitch-track': {
-            opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
-          },
-        },
-        '& .MuiSwitch-thumb': {
-          boxSizing: 'border-box',
-          width: 22,
-          height: 22,
-        },
-        '& .MuiSwitch-track': {
-          borderRadius: 26 / 2,
-          backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
-          opacity: 1,
-          transition: theme.transitions.create(['background-color'], {
-            duration: 500,
-          }),
-        },
-      }));
+    const handleOnClick = ()=>{
+      useStore.getState().handlePopupName({
+        type: "HANDLE_POPUP_NAME", popUpName: 'right'
+      })
+    }
     
-      const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
     return (
         <div className='flex flex-col justify-between items-start py-[32px] bg-white drop-shadow-lg h-[100vh]'>
           <div className='my-0 flex flex-col w-full items-center space-y-[24px]'>
+          <div className='flex items-end justify-between w-full px-[24px]'>
             <Typography sx={{
               fontSize: '14px'
             }}>Step</Typography>
+            <ButtonCross onClick={handleOnClick}/>
+            </div>
             <div className='w-full h-[1px] rounded-full bg-[#343638] opacity-[10%]'/>
           </div>
 

@@ -4,10 +4,8 @@ import {
   getEdgeCenter,
   getMarkerEnd,
 } from "react-flow-renderer";
-import OptionSelection from "../OptionSelection";
 
 import styles from "./ButtonEdge.module.css";
-import useStore from "../../store";
 
 const foreignObjectSize = 40;
 
@@ -24,12 +22,12 @@ function ButtonEdge({
   arrowHeadType,
   markerEndId,
 }) {
-  const onEdgeClick = (evt, id) => {
-    evt.stopPropagation();
-    useStore.getState().handlePopUp({
-      type: "HANDLE_EDGE_CLICK", edgeId: id
-    })
-  };
+  // const onEdgeClick = (evt, id) => {
+  //   evt.stopPropagation();
+  //   useStore.getState().handlePopUp({
+  //     type: "HANDLE_EDGE_CLICK", edgeId: id
+  //   })
+  // };
   const edgePath = getBezierPath({
     sourceX,
     sourceY,
