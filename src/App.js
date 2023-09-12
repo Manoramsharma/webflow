@@ -10,6 +10,7 @@ import ConditionBar from "./conditionBar";
 import { useState } from "react";
 
 const App = () => {
+  const formUpState = useStore((state)=>state.formUpState)
   const name = useStore.getState().nodeName
   console.log(name)
   const [show,setShow] = useState()
@@ -19,9 +20,9 @@ const App = () => {
       <div className="flex flex-row w-full">
         <Home/>
         <RightPanel />
-        <EmailBar/>
-        <ConditionBar/>
-        <SMSBar/>
+        {formUpState && <EmailBar/>}
+        {/* <ConditionBar/>
+        <SMSBar/> */}
       </div> 
     </div> 
   );

@@ -9,7 +9,11 @@ function EmailTypeNode({ id, type }) {
 
   const elements = useStore.getState().initialElements;
 
-
+const handleOnClick = ()=>{
+  useStore.getState().handleFormUp({
+    type: "HANDLE_FORM_UP", formUpState: true
+  })
+}
 //   const handleClick = (event) => {
 //     event.stopPropagation();
 //     useStore.getState().handlePopUp({
@@ -29,7 +33,7 @@ function EmailTypeNode({ id, type }) {
 //   };
 
   return (
-    <div className={styles.WrapperWrapper}>
+    <div className={styles.WrapperWrapper} onClick={handleOnClick}>
       <div
         style={{
           display: "flex",
