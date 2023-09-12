@@ -9,7 +9,11 @@ function EmailTypeNode({ id, type }) {
 
   const elements = useStore.getState().initialElements;
 
-
+const handleOnClick = ()=>{
+  useStore.getState().handlePopupName({
+    type: "HANDLE_POPUP_NAME", popUpName: 'email'
+  })
+}
 //   const handleClick = (event) => {
 //     event.stopPropagation();
 //     useStore.getState().handlePopUp({
@@ -28,8 +32,14 @@ function EmailTypeNode({ id, type }) {
 
 //   };
 
+const handleDelete = ()=>{
+  useStore.getState().handlePopupName({
+    type: "HANDLE_POPUP_NAME", popUpName: 'right'
+  })
+}
+
   return (
-    <div className={styles.WrapperWrapper}>
+    <div className={styles.WrapperWrapper} onClick={handleOnClick}>
       <div
         style={{
           display: "flex",
@@ -38,6 +48,7 @@ function EmailTypeNode({ id, type }) {
       >
         <ButtonCross
           onClick={() => {
+            handleDelete()
             const tempEle = removeNode(elements, id, type);
             useStore.getState().handleNode({
               type: "INITIAL_ELEMENTS", initialElements: tempEle

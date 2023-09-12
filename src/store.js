@@ -5,6 +5,7 @@ export const useStore = create((set) => ({
     initialElements: [],
       nodes: [],
       popUpState: false,
+      popUpName: "right",
       edgeId: "",
       componentToRender: <OptionSelection />,
       handleNode: (action) => {
@@ -46,6 +47,20 @@ export const useStore = create((set) => ({
               return {
                 ...state,
                 componentToRender: action.componentToRender,
+              };
+            }
+            default:
+              return state;
+          }
+        });
+      },
+      handlePopupName: (action) => {
+        set((state) => {
+          switch (action.type) {
+            case 'HANDLE_POPUP_NAME': {
+              return {
+                ...state,
+                popUpName: action.popUpName,
               };
             }
             default:

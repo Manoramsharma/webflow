@@ -35,8 +35,20 @@ function SmsTypeNode({ id, type }) {
 
   };
 
+  const handleOnClick = ()=>{
+    useStore.getState().handlePopupName({
+      type: "HANDLE_POPUP_NAME", popUpName: 'sms'
+    })
+  }
+
+  const handleDelete = ()=>{
+    useStore.getState().handlePopupName({
+      type: "HANDLE_POPUP_NAME", popUpName: 'right'
+    })
+  }
+
   return (
-    <div className={styles.WrapperWrapper}>
+    <div className={styles.WrapperWrapper} onClick={handleOnClick}>
       <div
         style={{
           display: "flex",
@@ -45,6 +57,7 @@ function SmsTypeNode({ id, type }) {
       >
         <ButtonCross
           onClick={() => {
+            handleDelete()
             const tempEle = removeNode(elements, id, type);
             useStore.getState().handleNode({
               type: "INITIAL_ELEMENTS", initialElements: tempEle
